@@ -49,22 +49,22 @@
     <!-- 租房小组 -->
     <van-cell :border="false" title="租房小组" value="更多" />
     <van-row>
-      <van-col span="12" class="group-item">
+      <van-col
+        span="12"
+        class="group-item"
+        v-for="obj in resultText"
+        :key="obj.id"
+      >
         <img
-          src="@/assets/imgs/4.png"
+          :src="imgsrc + obj.imgSrc"
           alt=""
           style="width: 50px; height: 50px"
         />
         <!-- <span>去出租对对对对</span> -->
-        <p>去出租对对<br />对对鞍山市</p>
-      </van-col>
-      <van-col span="12" class="group-item">
-        <img
-          src="@/assets/imgs/4.png"
-          alt=""
-          style="width: 40px; height: 40px"
-        />
-        <span>去出租</span>
+        <p>
+          {{ obj.title }} <br />
+          {{ obj.desc }}
+        </p>
       </van-col>
     </van-row>
   </div>
@@ -72,6 +72,7 @@
 
 <script>
 import { recommendImgAPI } from "@/api";
+import { recommendHomeTextAPI } from "@/api";
 
 export default {
   name: "MyItem",
@@ -79,6 +80,7 @@ export default {
     return {
       value: "",
       resultImg: [],
+      resultText: [],
       imgsrc: "http://liufusong.top:8080",
     };
   },
@@ -86,6 +88,10 @@ export default {
     const res = await recommendImgAPI();
     // console.log(res);
     this.resultImg = res.data.body;
+
+    const res1 = await recommendHomeTextAPI();
+    console.log(res1);
+    this.resultText = res1.data.body;
   },
 
   methods: {
@@ -127,6 +133,5 @@ img {
 }
 .group-item p {
   margin-left: 8px;
-  font-size: 14px;
 }
 </style>
