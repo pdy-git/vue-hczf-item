@@ -14,7 +14,7 @@
         v-model="value"
         show-action
         label="地址"
-        placeholder="请输入搜索关键词"
+        placeholder="请输入小区或地址"
         @search="onSearch"
       >
         <template #action>
@@ -27,30 +27,44 @@
     </div>
     <!-- 跳转页面 -->
     <div style="text-align: center">
-      <van-row gutter="20" align="center">
+      <van-row align="center" class="home-main">
         <van-col span="6">
-          <img src="@/assets/imgs/1.png" alt="" />
+          <div class="am-flexbox-item">
+            <img src="@/assets/imgs/1.png" alt="" />
+          </div>
           <span>整租</span>
         </van-col>
         <van-col span="6" center>
-          <img src="@/assets/imgs/2.png" alt="" />
+          <div class="am-flexbox-item">
+            <img src="@/assets/imgs/2.png" alt="" />
+          </div>
           <span>合租</span>
         </van-col>
         <van-col span="6" center>
-          <img src="@/assets/imgs/3.png" alt="" />
+          <div class="am-flexbox-item">
+            <img src="@/assets/imgs/3.png" alt="" />
+          </div>
           <span>地图找房</span>
         </van-col>
         <van-col span="6" center>
-          <img src="@/assets/imgs/4.png" alt="" />
+          <div class="am-flexbox-item">
+            <img src="@/assets/imgs/4.png" alt="" />
+          </div>
           <span>去出租</span>
         </van-col>
       </van-row>
     </div>
     <!-- 租房小组 -->
-    <van-cell :border="false" title="租房小组" value="更多" />
-    <van-row>
+    <van-cell
+      :border="false"
+      title="租房小组"
+      size="large"
+      value="更多"
+      style="background-color: #eee"
+    />
+    <van-row class="home-comment">
       <van-col
-        span="12"
+        span="11"
         class="group-item"
         v-for="obj in resultText"
         :key="obj.id"
@@ -60,7 +74,6 @@
           alt=""
           style="width: 50px; height: 50px"
         />
-        <!-- <span>去出租对对对对</span> -->
         <p>
           {{ obj.title }} <br />
           {{ obj.desc }}
@@ -101,20 +114,29 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="less">
 .my-swipe .van-swipe-item {
   color: #fff;
   font-size: 20px;
+  height: 212px;
   line-height: 150px;
   text-align: center;
   background-color: #39a9ed;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
-.my-swipe {
-  height: 212px;
-}
-img {
-  width: 100%;
-  height: 100%;
+
+.am-flexbox-item {
+  img {
+    height: 60px;
+    width: 60px;
+  }
+
+  span {
+    font-size: 14px;
+  }
 }
 .box {
   position: relative;
@@ -126,12 +148,22 @@ img {
   right: 10px;
   background-color: transparent;
 }
-.group-item {
-  display: flex;
-  background-color: #fff;
-  align-items: center;
+.home-main {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-.group-item p {
-  margin-left: 8px;
+:deep(.home-comment) {
+  background-color: #eee;
+  padding-bottom: 10px;
+  .group-item {
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 10px;
+    p {
+      margin-left: 8px;
+    }
+  }
 }
 </style>
